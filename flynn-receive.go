@@ -62,7 +62,7 @@ func main() {
 
 	var output bytes.Buffer
 	slugURL := fmt.Sprintf("http://%s/%s.tgz", shelfHost, commit)
-	cmd := exec.Command("flynn/slugbuilder", slugURL)
+	cmd := exec.Command(exec.DockerImage("flynn/slugbuilder", ""), slugURL)
 	cmd.Stdout = io.MultiWriter(os.Stdout, &output)
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin
@@ -95,7 +95,7 @@ func main() {
 		proc := prevRelease.Processes[t]
 		proc.Cmd = []string{"start", t}
 		if t == "web" {
-			proc.Ports.TCP = 1
+			proc.Ports = []ct.Port{{Proto: "tcp"}}
 			if proc.Env == nil {
 				proc.Env = make(map[string]string)
 			}
