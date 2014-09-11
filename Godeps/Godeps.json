@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/flynn/flynn-receive",
+	"ImportPath": "github.com/flynn-archive/flynn-receive",
 	"GoVersion": "go1.2.1",
 	"Packages": [
 		"./..."
